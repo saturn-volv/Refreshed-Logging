@@ -6,5 +6,6 @@
     "url": "https://github.com/saturn-volv/Refreshed-Logging",
     "license": "MIT",
     "tags": ["cross", "gui"],
+    "releasenote": "First instance. No issues found.",
     "contributors": ["saturn-volv"]
 }
