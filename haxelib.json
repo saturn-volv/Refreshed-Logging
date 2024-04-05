@@ -1,0 +1,10 @@
+{
+    "name": "refreshed_logging",
+    "description": "This library provides a fresh method for logging to your haxe project. Allowing you to use more freedom than just a 'trace' method",
+    "version": "0.0.1-alpha",
+    "classPath": "src/",
+    "url": "https://github.com/saturn-volv/Refreshed-Logging",
+    "license": "MIT",
+    "tags": ["cross", "gui"],
+    "contributors": ["saturn-volv"]
+}
