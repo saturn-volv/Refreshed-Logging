@@ -1,8 +1,11 @@
 # Refreshed-Logging
- A cool and hip new way to log to your console with haxe! 
-
+ A cool and hip new way to log to your console with haxe! <br>
  All the kids are logging their work this way, so you should too!
 
+ If you're new to haxelibs the quickest way to install this is to run the following command from a terminal:
+ ```bash
+  haxelib install refreshed_logging
+ ```
  ## How to use it?
   Well there's this handy feature called "wildcard" importing, where you can use a `.*` at the end of an import to include all static functions and variables from a class. We can use this with our `Logger` class to have it feel like we never even moved from the classic trace statement. 
 

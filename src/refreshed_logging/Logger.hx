@@ -6,6 +6,7 @@ import refreshed_logging.logging.Log;
 import refreshed_logging.logging.Log.LogFunction;
 
 @:access(refreshed_logging.logging.level.LogLevel)
+@:access(refreshed_logging.logging.Log)
 class Logger {
     public static var info(get, never):LogFunction;
     static function get_info() {
@@ -28,7 +29,7 @@ class Logger {
     public static var selectedLogFunction(default, set):LogFunction = LogLevel.trace;
     static function set_selectedLogFunction(func:LogFunction) {
         selectedLogFunction = func;
-        Log.get().defaultLogLevel = selectedLogFunction;
+        Log.instance.defaultLogLevel = selectedLogFunction;
         return selectedLogFunction;
     }
 
