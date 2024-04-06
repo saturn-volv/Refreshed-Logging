@@ -29,5 +29,30 @@ var customLogLevel = new LogLevel("custom_loglevel", AnsiColors.CYAN);
         // Or if you aren't in the same scope as your log level, there is a permanent instance saved always:
         LogLevel.levelMap.get("custom_loglevel").callback(v, infos);
   ```
- ### Planned Features
- I'm planning on adding an option to change how the output is formatted, just so your project can be unique to you! Might even include some very basic examples you can change the format to, so you don't have to figure it all out for yourself every time.
+
+  ### Customization
+  You can create your own formattings and defaults for your project, including changing what the default function trace callback is. 
+
+  #### Changing the `trace` Log Function
+  The logger has the option for a user to create or use their own custom log functions with ease, and everytime a `trace()` is called, it will default to this function instead.
+
+  Changing the default trace callback is as simple as so:
+  ```haxe
+  Logger.selectedLogFunction = customLog;
+  ```
+
+  #### Changing the Log Format
+  The logger has the functionality to allow for the user to implement their own format for logging to the console. This will be the format that all logs default to, including a standard trace call.
+
+  You can change this with either your own function *or* a simple arrow function variable. Examples of this can be found in the `formatting.LogFormats` class, as well as some other options for formats built in as defaults you can choose to change between.
+
+  Changing the default format is as such:
+  ```haxe
+    Logger.selectedLogFunction = (input, ?infos, level) -> {
+        return '> ${level.color}${input}';
+    };
+  ```
+  ```haxe
+  trace("Hello World!"); // "> Hello World!"
+  ```
+

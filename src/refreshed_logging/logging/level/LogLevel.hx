@@ -52,21 +52,9 @@ class LogLevel {
         warning("Please use `Logger.info` instead of `trace`", null);
         print(v, infos, "default");
     }
-
-    private static final defaultFormat:LogFormat = (v, ?infos, level) -> {
-        var tracedObj:String = Std.string(v);
-        var preface = level.getPrefix();
-        if (infos == null) return '${preface.replace(":", " >>") } $tracedObj';
-        var posInfos:String = '$preface ${infos.fileName} (line ${infos.lineNumber})';
-
-        for (customParam in infos.customParams ?? [])
-            tracedObj += ', ${Std.string(customParam)}';
-
-        return '$posInfos >> $tracedObj';
-    };
     private static function print(v:Dynamic, ?infos:Null<PosInfos>, levelName:String) {
         var level = levelMap.get(levelName);
-        var str = defaultFormat(v, infos, level) + AnsiColor.DEFAULT;
+        var str = Logger.selectedLogFormat(v, infos, level) + AnsiColor.DEFAULT;
 
         #if js
         if (js.Syntax.typeof(untyped console) != "undefined" && (untyped console).log != null) 

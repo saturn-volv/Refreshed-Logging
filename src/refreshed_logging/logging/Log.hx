@@ -41,13 +41,12 @@ class Log {
         return instance;
     }
 
-    public var defaultLogLevel(default, set):Null<LogFunction>;
-    public function set_defaultLogLevel(func:Null<LogFunction>) {
+    private var defaultLogLevel(default, set):Null<LogFunction>;
+    function set_defaultLogLevel(func:Null<LogFunction>) {
         this.defaultLogLevel = func;
         updateLog();
         return this.defaultLogLevel;
     }
-
     private static function updateLog() : Void {
         haxe.Log.trace = instance.defaultLogLevel ?? LogLevel.trace;
     }
