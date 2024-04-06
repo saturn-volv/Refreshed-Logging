@@ -6,6 +6,6 @@
     "url": "https://github.com/saturn-volv/Refreshed-Logging",
     "license": "MIT",
     "tags": ["cross", "gui"],
-    "releasenote": "First instance. No issues found.",
+    "releasenote": "Fixed a bug which made the logger unusable due to access problems (oops).",
     "contributors": ["saturn-volv"]
 }
