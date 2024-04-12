@@ -14,6 +14,26 @@
 import refreshed_logging.Logger.*;
   ```
  Now you too can use the hip new log methods without needing all that instance getting and other junk of the `Log` class (which has been kept public so you can still mess with, I want my users to have complete creative freedom with this).
+<br><br>
+
+ ### ANSI 
+ <sub> (Some prerequisite knowledge for the logger, **only** for if you wish to mess with colors while logging.)</sub> <br>
+
+ Ansi is the way in which terminals are controlled/displayed, and therefore we can change a few things while logging. If you pay attention to the `AnsiColors` enum, you'll notice an abstract called `AnsiStyle`. This is how we are going to be changing not only colors, but also how the test is displayed in the terminal. In `Ansi.hx` you can find a bunch of abstracts and classes which become utility for working with ansi. An enum named `Attributes` gives you a list of values which each control certain things when working with Ansi Styles. You can choose to either memorise these integer values, or call them from the enum itself. 
+ 
+ While working with Attributes, you can get them from inside a string to have them auto translate to become their ANSI escape value. 
+
+ You can also use the Refreshed Escape key to shorthand your ANSI calls. When you wish to add an ANSI value into a string, simply use a `` ` `` followed by a hex value of 2 digits. This hex value will correspond directly to an ANSI Attribute. You can use this to set colors of the string or set it's formatting.
+
+ An example of this would be:
+ ```haxe
+  Logger.info("`0x22hey!"); // -> \033[34mhey!
+ ```
+ Would output as the following:
+ ```ansi
+ [34mhey!
+ ```
+<br><br>
 
  ### Log Levels
   Each native log function has a parent `LogLevel` instance. (You can find examples of how to create these in [`Log`](https://github.com/saturn-volv/Refreshed-Logging/blob/main/src/refreshed_logging/logging/Log.hx))
@@ -32,6 +52,7 @@ var customLogLevel = new LogLevel("custom_loglevel", AnsiColors.CYAN);
         // Or if you aren't in the same scope as your log level, there is a permanent instance saved always:
         LogLevel.levelMap.get("custom_loglevel").callback(v, infos);
   ```
+<br><br>
 
   ### Customization
   You can create your own formattings and defaults for your project, including changing what the default function trace callback is. 
