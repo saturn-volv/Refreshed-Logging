@@ -1,5 +1,6 @@
 package refreshed_logging.logging;
 
+import refreshed_logging.logging.ansi.Ansi;
 import backend.KeyedLog;
 import backend.IKeyable;
 import haxe.PosInfos;
@@ -45,5 +46,13 @@ final class Log implements IKeyable<LogLevel> {
 
     public function getFromKey(key:String) {
         return LogLevel.levelMap.get(key);
+    }
+
+    public static function clear() {
+        #if sys
+        Sys.print(Ansi.CLEAR_CONSOLE);
+        #else
+        LogLevel.print(Ansi.CLEAR_CONSOLE, null, "");
+        #end
     }
 }

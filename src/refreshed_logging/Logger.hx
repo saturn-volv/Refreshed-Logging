@@ -13,6 +13,10 @@ class Logger {
     static function get_logger() {
         return Log.get();
     }
+    public static var clear(get, never): () -> Void;
+    static function get_clear(): () -> Void {
+        return Log.clear;
+    }
     public static var info(get, never):LogFunction;
     static function get_info() {
         return logger.info;

@@ -148,4 +148,6 @@ enum abstract Attributes(Attribute) from Attribute to Attribute {
     }
 }
 
-class Ansi {}
+class Ansi {
+    public static final CLEAR_CONSOLE:String = '\033[2J';
+}
