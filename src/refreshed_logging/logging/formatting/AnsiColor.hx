@@ -1,14 +1,16 @@
 package refreshed_logging.logging.formatting;
 
-enum abstract AnsiColor(String) {
-    var BLACK = '\033[0;30m';
-    var RED = '\033[0;31m';
-    var GREEN = '\033[0;32m';
-    var YELLOW = '\033[0;33m';
-    var BLUE = '\033[1;34m';
-    var MAGENTA = '\033[1;35m';
-    var CYAN = '\033[0;36m';
-    var GREY = '\033[0;37m';
-    var DEFAULT = '\033[0;37m';
-    var WHITE = '\033[1;37m';
+import refreshed_logging.logging.ansi.Ansi.AnsiStyle;
+
+class AnsiColor {
+    public static final BLACK = new AnsiStyle([0, 30]);
+    public static final RED = new AnsiStyle([0, 31]);
+    public static final GREEN = new AnsiStyle([0, 32]);
+    public static final YELLOW = new AnsiStyle([0, 33]);
+    public static final BLUE = new AnsiStyle([1, 34]);
+    public static final MAGENTA = new AnsiStyle([1, 35]);
+    public static final CYAN = new AnsiStyle([0, 36]);
+    public static final GREY = new AnsiStyle([0, 37]);
+    public static final DEFAULT = new AnsiStyle([0, 37]);
+    public static final WHITE = new AnsiStyle([1, 37]);
 }

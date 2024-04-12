@@ -29,11 +29,11 @@ import refreshed_logging.Logger.*;
  ```haxe
   Logger.info("`0x22hey!"); // -> \033[34mhey!
  ```
- Would output as the following:
- ```ansi
- [34mhey!
- ```
+ This show's the following result:<br>![An image of the haxe terminal outputing the previous text but with a blue color.](docs/show_ansi_shorthand.png)
+
+ You can also specify an **Hexadecimal** color using RGB within your strings. This is done in the same vain but with a 6 digit hex instead.
 <br><br>
+
 
  ### Log Levels
   Each native log function has a parent `LogLevel` instance. (You can find examples of how to create these in [`Log`](https://github.com/saturn-volv/Refreshed-Logging/blob/main/src/refreshed_logging/logging/Log.hx))

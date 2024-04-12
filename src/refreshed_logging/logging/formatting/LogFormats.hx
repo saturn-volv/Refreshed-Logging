@@ -5,10 +5,10 @@ using StringTools;
 
 class LogFormats {
     public static final haxeLogFormat:LogFormat = (input, ?infos, level) -> {
-        var output:String = Std.string(input);
+        var output:StyledString = new StyledString(Std.string(input));
         if (infos == null) return output;
 
-        var posInfos:String = '${infos.fileName}:${infos.lineNumber}';
+        var posInfos:StyledString = '${infos.fileName}:${infos.lineNumber}';
         for (param in infos.customParams ?? []) 
             output += ', ${Std.string(param)}';
 
@@ -16,11 +16,11 @@ class LogFormats {
     };
 
     public static final refreshedLogFormat:LogFormat = (input, ?infos, level) -> {
-        var output:String = Std.string(input);
+        var output:StyledString = new StyledString(Std.string(input));
         var preface = level.getPrefix();
         if (infos == null) return '${preface.replace(":", " >>")}$output';
 
-        var posInfos:String = '$preface ${infos.fileName} (line ${infos.lineNumber})';
+        var posInfos:StyledString = '$preface ${infos.fileName} (line ${infos.lineNumber})';
         for (param in infos.customParams ?? [])
             output += ', ${Std.string(param)}';
 

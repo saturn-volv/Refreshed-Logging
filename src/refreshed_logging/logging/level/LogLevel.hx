@@ -3,6 +3,7 @@ package refreshed_logging.logging.level;
 import refreshed_logging.logging.Log;
 import refreshed_logging.logging.Log.LogFunction;
 import refreshed_logging.logging.formatting.AnsiColor;
+import refreshed_logging.logging.ansi.Ansi.AnsiStyle;
 
 import haxe.PosInfos;
 
@@ -11,11 +12,11 @@ using StringTools;
 class LogLevel {
     public static final levelMap:LevelMap = new LevelMap();
     public final name:String;
-    public final color:AnsiColor;
+    public final color:AnsiStyle;
 
     public final callback:LogFunction;
 
-    public function new(name:String, ?color:AnsiColor, ?callback:LogFunction) {
+    public function new(name:String, ?color:AnsiStyle, ?callback:LogFunction) {
         this.name = name;
         this.color = color ?? AnsiColor.GREY;
         this.callback = callback ?? (v, ?infos) -> customTrace(v, infos, name);
