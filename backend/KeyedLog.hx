@@ -1,9 +1,6 @@
 package backend;
 
-import backend.IKeyable;
-
 import refreshed_logging.logging.Log;
-import refreshed_logging.logging.level.LogLevel;
 
 abstract KeyedLog(Log) from Log to Log {
     @:op(a.b)

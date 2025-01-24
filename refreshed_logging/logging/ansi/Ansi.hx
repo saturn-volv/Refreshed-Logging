@@ -1,20 +1,24 @@
 package refreshed_logging.logging.ansi;
 
 @:forward(push)
-abstract AnsiStyle(Array<Attribute>) from Array<Attribute> {
+abstract AnsiStyle(Array<Attribute>) from Array<Attribute> to Array<Attribute> {
     public static final ESCAPE:String = '\033';
     inline public function new(attributeArr:Array<Attribute>) {
         this = attributeArr;
-        this.sort((a, b) -> {return a.asInt() > b.asInt() ? b : a;});
+        //this.sort((a, b) -> {return a.asInt() > b.asInt() ? b : a;});
     }
 
-    public function toString() {
-        var output:String = '[';
+    @:to public function toString():String {
+        /*var output:String = '[';
         for (i => attr in this) {
             if (i > 0) output += ';';
             output += attr.asInt();
-        }
-        return '${ESCAPE}${output}m';
+        }*/
+        var output = "";
+        for (attr in this)
+            output += attr.toString();
+        return output;
+        //return '${ESCAPE}${output}m';
     }
 }
 
@@ -31,8 +35,8 @@ abstract Attribute(Int) from Int to Int {
         return '${AnsiStyle.ESCAPE}[${this}m';
     }
 }
-abstract AnsiColor24B(Int) from Int to Int{
-    public var red(get, never):Int;
+abstract AnsiColor24B(AnsiStyle) to AnsiStyle {
+    /*public var red(get, never):Int;
     public var green(get, never):Int;
     public var blue(get, never):Int;
 
@@ -44,14 +48,35 @@ abstract AnsiColor24B(Int) from Int to Int{
     }
     function get_blue():Int {
         return Std.int(this) & 0xFF;
+    }*/
+    @:op([]) static function arrayAccess(col:AnsiColor24B, index:Int) {
+            return col.toAnsiStyle()[index];
+    }
+    @:from static function fromInt(i:Int):AnsiColor24B {
+        return new AnsiColor24B(new AnsiStyle([38, 2, getRed(i), getGreen(i), getBlue(i)]));
+    }
+    @:from static function fromAttribute(i:Attribute):AnsiColor24B {
+        return fromInt(i.asInt());
     }
 
-    public inline function new(i:Int) {
-        this = i;
+    public inline function new(value:AnsiStyle) {
+        this = value;
+    }
+    static function getRed(i:Int) {
+        return (Std.int(i) >> 16) & 0xFF;
+    }
+    static function getGreen(i:Int) {
+        return (Std.int(i) >> 8) & 0xFF;
+    }
+    static function getBlue(i:Int) {
+        return Std.int(i) & 0xFF;
+    }
+    @:to public function toAnsiStyle():AnsiStyle {
+        return this;
     }
 
-    public function toString() {
-        return '${AnsiStyle.ESCAPE}[38;2;${red};${green};${blue}m';
+    @:to public function toString():String {
+        return '${AnsiStyle.ESCAPE}[38;2;${this[2]};${this[3]};${this[4]}m';
     }
 }
 enum abstract Attributes(Attribute) from Attribute to Attribute {
